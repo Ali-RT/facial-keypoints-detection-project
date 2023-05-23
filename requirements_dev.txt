@@ -1,0 +1,13 @@
+-r requirements.txt
+pip
+bump2version
+wheel
+watchdog
+flake8
+tox
+coverage
+Sphinx
+twine
+Click
+black
+isort
