@@ -1,4 +1,3 @@
-import glob
 import os
 
 import cv2
@@ -6,7 +5,7 @@ import matplotlib.image as mpimg
 import numpy as np
 import pandas as pd
 import torch
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import Dataset
 
 
 class FacialKeypointsDataset(Dataset):

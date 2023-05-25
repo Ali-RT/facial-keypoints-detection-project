@@ -1,0 +1,25 @@
+repos:
+  - repo: https://github.com/ambv/black
+    rev: 23.3.0 # Use the ref you want to point at
+    hooks:
+      - id: black
+        language_version: python3.11 # Should match the version of Python you're using
+        args: [--config=pyproject.toml]
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.11.5 # Use the ref you want to point at
+    hooks:
+      - id: isort
+        language_version: python3.11 # Should match the version of Python you're using
+        args: [--settings-path=pyproject.toml]
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.0.0 # Use the ref you want to point at
+    hooks:
+      - id: flake8
+        additional_dependencies: [
+            'flake8-bugbear',
+        ] # Optional: add extra plugins like flake8-bugbear
+        args: [--config=tox.ini]
+        exclude: docs/
+        

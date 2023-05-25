@@ -4,9 +4,9 @@
 
 
 import unittest
+
 from click.testing import CliRunner
 
-from facial_keypoints_detection import facial_keypoints_detection
 from facial_keypoints_detection import cli
 
 
@@ -27,7 +27,7 @@ class TestFacial_keypoints_detection(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(cli.main)
         assert result.exit_code == 0
-        assert 'facial_keypoints_detection.cli.main' in result.output
-        help_result = runner.invoke(cli.main, ['--help'])
+        assert "facial_keypoints_detection.cli.main" in result.output
+        help_result = runner.invoke(cli.main, ["--help"])
         assert help_result.exit_code == 0
-        assert '--help  Show this message and exit.' in help_result.output
+        assert "--help  Show this message and exit." in help_result.output

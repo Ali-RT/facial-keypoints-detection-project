@@ -1,18 +1,12 @@
 from datetime import datetime
+from typing import Tuple
 
 import torch
 import torch.nn as nn
+from data_load import FacialKeypointsDataset, Normalize, RandomCrop, Rescale, ToTensor
+from models import Net
 from torch.utils.data import DataLoader
 from torchvision import transforms
-
-from data_load import (
-    FacialKeypointsDataset,
-    Normalize,
-    RandomCrop,
-    Rescale,
-    ToTensor,
-)
-from models import Net
 
 
 def get_transforms() -> transforms.Compose:
@@ -20,7 +14,7 @@ def get_transforms() -> transforms.Compose:
     return transforms.Compose([Rescale(250), RandomCrop(224), Normalize(), ToTensor()])
 
 
-def get_dataloaders(batch_size_train: int, batch_size_test: int) -> (DataLoader, DataLoader):
+def get_dataloaders(batch_size_train: int, batch_size_test: int) -> Tuple[DataLoader, DataLoader]:
     """Generates train and test data loaders."""
     data_transform = get_transforms()
 

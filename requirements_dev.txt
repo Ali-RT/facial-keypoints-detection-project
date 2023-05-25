@@ -11,3 +11,4 @@ twine
 Click
 black
 isort
+pre-commit

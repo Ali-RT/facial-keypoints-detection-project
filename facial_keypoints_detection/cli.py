@@ -1,13 +1,14 @@
 """Console script for facial_keypoints_detection."""
-import sys
 import click
+
 
 @click.group()
 def cli():
     pass
 
+
 @cli.command()
-@click.option('--data', help='Path to the training data.')
+@click.option("--data", help="Path to the training data.")
 def train(data):
     """
     Train a new model.
@@ -16,8 +17,9 @@ def train(data):
     # train_model(data)
     click.echo(f"Training model with data from {data}")
 
+
 @cli.command()
-@click.option('--image', help='Path to the image.')
+@click.option("--image", help="Path to the image.")
 def detect(image):
     """
     Detect facial landmarks in an image.
@@ -26,9 +28,10 @@ def detect(image):
     # detect_facial_landmark(image)
     click.echo(f"Detecting facial landmarks in image at {image}")
 
+
 @cli.command()
-@click.option('--image', help='Path to the image.')
-@click.option('--filter', help='Filter to be applied.')
+@click.option("--image", help="Path to the image.")
+@click.option("--filter", help="Filter to be applied.")
 def filter(image, filter):
     """
     Apply a filter to a face in an image.
@@ -36,6 +39,7 @@ def filter(image, filter):
     # Call your function to apply a facial filter
     # apply_facial_filter(image, filter)
     click.echo(f"Applying {filter} to image at {image}")
+
 
 if __name__ == "__main__":
     cli()
