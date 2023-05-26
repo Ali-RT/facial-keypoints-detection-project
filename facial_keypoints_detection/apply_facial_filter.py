@@ -15,7 +15,7 @@ def show_keypoints(image, key_pts):
 
 def load_and_process_sunglasses():
     """Load sunglasses image and display its alpha channel"""
-    sunglasses = cv2.imread("./images/sunglasses.png", cv2.IMREAD_UNCHANGED)
+    sunglasses = cv2.imread("./facial_keypoints_detection/images/sunglasses.png", cv2.IMREAD_UNCHANGED)
     alpha_channel = sunglasses[:, :, 3]
     values = np.where(alpha_channel != 0)
     return sunglasses, values
@@ -23,14 +23,14 @@ def load_and_process_sunglasses():
 
 def load_training_data():
     """Load training data and display some basic stats"""
-    key_pts_frame = pd.read_csv("./data/training_frames_keypoints.csv")
+    key_pts_frame = pd.read_csv("./facial_keypoints_detection/data/training_frames_keypoints.csv")
     return key_pts_frame
 
 
 def get_image_and_keypoints(n, key_pts_frame):
     """Get an image and its keypoints, based on the index 'n'"""
     image_name = key_pts_frame.iloc[n, 0]
-    image = mpimg.imread(os.path.join("./data/training/", image_name))
+    image = mpimg.imread(os.path.join("./facial_keypoints_detection/data/training/", image_name))
     key_pts = key_pts_frame.iloc[n, 1:].values
     key_pts = key_pts.astype("float").reshape(-1, 2)
     return image, key_pts
@@ -63,7 +63,7 @@ def apply_sunglasses(image, key_pts):
     return image_copy
 
 
-if __name__ == "__main__":
+def apply_filter():
     sunglasses, values = load_and_process_sunglasses()
     print("The non-zero values of the alpha channel are: ", values)
 

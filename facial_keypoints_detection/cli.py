@@ -1,6 +1,7 @@
 """Console script for facial_keypoints_detection."""
 import click
 
+from facial_keypoints_detection.apply_facial_filter import apply_filter
 from facial_keypoints_detection.detect_facial_keypoints import detect
 from facial_keypoints_detection.train_model import train
 
@@ -44,6 +45,7 @@ def filter(image, filter):
     # Call your function to apply a facial filter
     # apply_facial_filter(image, filter)
     click.echo(f"Applying {filter} to image at {image}")
+    apply_filter()
 
 
 if __name__ == "__main__":
