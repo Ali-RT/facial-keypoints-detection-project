@@ -22,11 +22,13 @@ def show_all_keypoints(image, keypoints):
 def load_image_and_cascade():
     """Load image and Haar cascade classifier."""
     # load in color image for face detection
-    image = cv2.imread("images/obamas.jpg")
+    image = cv2.imread("./facial_keypoints_detection/images/obamas.jpg")
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # switch red and blue color channels
 
     # load in a haar cascade classifier for detecting frontal faces
-    face_cascade = cv2.CascadeClassifier("detector_architectures/haarcascade_frontalface_default.xml")
+    face_cascade = cv2.CascadeClassifier(
+        "./facial_keypoints_detection/detector_architectures/haarcascade_frontalface_default.xml"
+    )
 
     return image, face_cascade
 
@@ -66,13 +68,15 @@ def prepare_roi(image, faces):
         yield torch.from_numpy(roi).type(torch.FloatTensor)
 
 
-def main():
+def detect():
     """Main function."""
     image, face_cascade = load_image_and_cascade()
     faces, image_with_detections = detect_faces(image, face_cascade)
 
     net = Net()
-    net.load_state_dict(torch.load("./saved_models/facial_keypoints_model_2023_05_22-10_45_56_AM.pt"))
+    net.load_state_dict(
+        torch.load("./facial_keypoints_detection/saved_models/facial_keypoints_model_2023_05_25-06_48_31_PM.pt")
+    )
     net.eval()
 
     for roi_tensor in prepare_roi(image, faces):
@@ -83,4 +87,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    detect()

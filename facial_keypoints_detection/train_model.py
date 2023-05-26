@@ -19,16 +19,16 @@ def get_dataloaders(batch_size_train: int, batch_size_test: int) -> Tuple[DataLo
     data_transform = get_transforms()
 
     train_dataset = FacialKeypointsDataset(
-        csv_file="./data/training_frames_keypoints.csv",
-        root_dir="./data/training/",
+        csv_file="./facial_keypoints_detection/data/training_frames_keypoints.csv",
+        root_dir="./facial_keypoints_detection/data/training/",
         transform=data_transform,
     )
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size_train, shuffle=True, num_workers=0)
 
     test_dataset = FacialKeypointsDataset(
-        csv_file="./data/test_frames_keypoints.csv",
-        root_dir="./data/test/",
+        csv_file="./facial_keypoints_detection/data/test_frames_keypoints.csv",
+        root_dir="./facial_keypoints_detection/data/test/",
         transform=data_transform,
     )
 
@@ -65,6 +65,7 @@ def train_model(
 ) -> None:
     """Train the model and print loss statistics."""
     print_interval = 10
+    model.train()  # Set the model to training mode before the start of training loop
     for epoch in range(num_epochs):
         running_loss = 0.0
 
@@ -91,12 +92,13 @@ def train_model(
                     f"Validation Loss: {validation_loss / len(test_loader):.5f}"
                 )
                 running_loss = 0.0
-        # End of epoch
 
+        # End of epoch
+    model.train()  # Set the model back to training mode after the end of the training loop
     print("Finished training.")
 
 
-def main() -> None:
+def train() -> None:
     """Main function."""
     model = Net()
     criterion = nn.SmoothL1Loss()
@@ -108,10 +110,6 @@ def main() -> None:
 
     # Save the model
     date_time = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")  # Get current date and time
-    model_name = f"./saved_models/facial_keypoints_model_{date_time}.pth"  # Create a unique name for the model
+    model_name = f"./facial_keypoints_detection/saved_models/facial_keypoints_model_{date_time}.pt"  # Create a unique name for the model
     torch.save(model.state_dict(), model_name)
     print(f"Model saved as {model_name}")
-
-
-if __name__ == "__main__":
-    main()
