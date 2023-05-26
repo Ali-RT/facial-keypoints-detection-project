@@ -13,7 +13,9 @@ This porject trains a convolutional neural network (CNN) specifically designed f
 Features
 --------
 
-* TODO
+* TODO:
+    - Add transfer learning
+    - Add more filters
 
 Credits
 -------
